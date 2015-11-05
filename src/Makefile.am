@@ -22,7 +22,8 @@ skiena_1_26_SOURCES = \
 	plotter.cxx \
 	plotter.h \
 	algorithms.h \
-	algorithms.cxx
+	algorithms.cxx \
+	data.cxx
 
 skiena_1_26_LDFLAGS = 
 

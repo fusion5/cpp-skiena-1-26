@@ -103,7 +103,7 @@ CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_skiena_1_26_OBJECTS = main.$(OBJEXT) plotter.$(OBJEXT) \
-	algorithms.$(OBJEXT)
+	algorithms.$(OBJEXT) data.$(OBJEXT)
 skiena_1_26_OBJECTS = $(am_skiena_1_26_OBJECTS)
 am__DEPENDENCIES_1 =
 skiena_1_26_DEPENDENCIES = $(am__DEPENDENCIES_1)
@@ -335,7 +335,8 @@ skiena_1_26_SOURCES = \
 	plotter.cxx \
 	plotter.h \
 	algorithms.h \
-	algorithms.cxx
+	algorithms.cxx \
+	data.cxx
 
 skiena_1_26_LDFLAGS = $(am__append_1)
 skiena_1_26_LDADD = $(SKIENA_1_26_LIBS)
@@ -433,6 +434,7 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/algorithms.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/data.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/main.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/plotter.Po@am__quote@
 
