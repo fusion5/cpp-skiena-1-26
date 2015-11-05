@@ -1,3 +1,7 @@
+/*
+ * A GTK window that plots points and allows the addition of points
+ * by clicking on the window.
+ */
 #include "plotter.h"
 
 Plotter::Plotter() :

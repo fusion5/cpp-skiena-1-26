@@ -48,10 +48,7 @@ std::vector<Edge*> compute_shortest_distances_tour_heuristic (
 
 		// Add the edge (p -> pnext)...
 		Edge* e;
-		e = new Edge();
-		e->p1 = p;
-		e->p2 = pnext;
-		e->distance = min;
+		e = new Edge(p, pnext, min);
 
 		std::cout << "Found a new edge of distance " << min << std::endl;
 		
@@ -66,10 +63,7 @@ std::vector<Edge*> compute_shortest_distances_tour_heuristic (
 
 	// Add one more edge to close the tour...
 	Edge *e;
-	e = new Edge();
-	e->p1 = first;
-	e->p2 = p;
-	e->distance = point_distance (p, first);
+	e = new Edge(first, p, point_distance (p, first));
 
 	edges.push_back (e);
 
@@ -134,10 +128,7 @@ std::vector<Edge*> compute_shortest_distances(
 			float d = point_distance(*i, *j);
 			steps++;
 
-			Edge *e = new Edge;
-			e->p1 		= *i;
-			e->p2 		= *j;
-			e->distance = d;
+			Edge *e = new Edge(*i, *j, d);
 
 			if (smallest_distances.size() < ps1.size()) {
 				smallest_distances.push(e);

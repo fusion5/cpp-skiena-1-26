@@ -6,10 +6,15 @@ struct Point {
 	int y;		 
 };
 
-struct Edge {
-	Point *p1;
-	Point *p2;
-	float distance;	// Distance between p1 and p2
+class Edge {
+	public:
+		
+		Point *p1;
+		Point *p2;
+		float distance;	// Distance between p1 and p2
+		Edge();
+		Edge(Point *p1, Point *p2, float distance);
+
 };
 
 #endif
