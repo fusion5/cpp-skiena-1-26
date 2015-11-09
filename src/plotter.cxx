@@ -7,7 +7,7 @@
 // #define PLOTTER_TRACE
 
 Plotter::Plotter() :
-frame( "Tour Plot Area"
+frame( "Tour diagram: click to add a point"
        , Gtk::ALIGN_CENTER
        , Gtk::ALIGN_CENTER
        , 1.0
@@ -40,9 +40,10 @@ frame( "Tour Plot Area"
 
 	frame.add (drawing_area);
 
-	button_box.pack_start(button_recompute,		Gtk::PACK_EXPAND_WIDGET);
-	// button_box.pack_start(button_separator1,	Gtk::PACK_SHRINK);
-	button_box.pack_start(button_reset,			Gtk::PACK_EXPAND_WIDGET);
+	button_box.set_layout(Gtk::BUTTONBOX_EXPAND);
+	button_box.add(button_recompute);	
+	button_box.add(button_reset);
+	
 	box.pack_start(frame, 						Gtk::PACK_EXPAND_WIDGET);
 	box.pack_start(separator,	 				Gtk::PACK_SHRINK);
 	box.pack_start(button_box,					Gtk::PACK_SHRINK);

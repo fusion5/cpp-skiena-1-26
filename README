@@ -1,0 +1,7 @@
+A GUI to define points and to compute a shortest tour between them. 
+It uses a very basic, greedy algorithm for now, always choosing the closest 
+point as the next one, but other algorithms might be implemented in the future.
+
+To compute the closest point, the algorithm traverses all unvisited points; but
+a more efficient Voronoi diagram could be precomputed which would give us more
+speed. 

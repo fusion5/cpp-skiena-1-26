@@ -32,7 +32,7 @@ class Plotter : public Gtk::Window {
 		Gtk::DrawingArea	drawing_area;
 		Gtk::VBox			box;
 		Gtk::HButtonBox		button_box;
-		// Gtk::VSeparator	    button_separator1;
+
 		Gtk::Separator		separator;
 		
 	private:
