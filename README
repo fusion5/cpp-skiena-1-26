@@ -6,5 +6,6 @@ To compute the closest point, the algorithm traverses all unvisited points; but
 a more efficient Voronoi diagram could be precomputed which would give us more
 speed. 
 
-<img src="https://github.com/fusion5/skiena-1-26/blob/master/screenshot-1.png" 
-/>
+Screenshot: 
+
+https://github.com/fusion5/skiena-1-26/blob/master/screenshot-1.png
