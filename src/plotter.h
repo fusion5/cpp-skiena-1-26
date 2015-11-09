@@ -4,6 +4,7 @@
 #include <gtkmm/drawingarea.h>
 #include <gtkmm/grid.h>
 #include <gtkmm/box.h>
+#include <gtkmm/buttonbox.h>
 #include <gtkmm/separator.h>
 #include <cairomm/context.h>
 
@@ -21,13 +22,18 @@ class Plotter : public Gtk::Window {
 		void set_points (std::list<Point*> ps);
 	protected:
 		void on_button_clicked();
+		void on_reset_clicked ();
 		virtual bool on_darea_draw(const Cairo::RefPtr<Cairo::Context> &cr);
 		virtual bool on_darea_press(const GdkEventButton *evt);
-		Gtk::Button			m_button;
-		Gtk::AspectFrame	m_frame;
-		Gtk::DrawingArea	m_drawing_area;
-		Gtk::VBox			m_box;
-		Gtk::Separator		m_separator;
+		Gtk::Button			button_recompute;
+		Gtk::Button			button_reset;
+		
+		Gtk::AspectFrame	frame;
+		Gtk::DrawingArea	drawing_area;
+		Gtk::VBox			box;
+		Gtk::HButtonBox		button_box;
+		// Gtk::VSeparator	    button_separator1;
+		Gtk::Separator		separator;
 		
 	private:
 		std::list<Point*> points;

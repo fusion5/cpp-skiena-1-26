@@ -18,7 +18,7 @@
 
 using namespace std;
 
-
+/*
 int cin_read_integer(int *v)
 {
 	cin >> *v;
@@ -32,8 +32,9 @@ int cin_read_integer(int *v)
 	}
 	return READ_OK;
 }
+*/
 
-
+/*
 void generate_pairs (int num_pairs) {
 	// Generate pairs as input for the main program...
 
@@ -48,7 +49,9 @@ void generate_pairs (int num_pairs) {
 		printf ("%d %d \n", x, y);		
 	}
 }
+*/
 
+/*
 void read_input (list<Point *> *ps) {
 	// Parse the input of:
 	// line  := int<whitespace>int
@@ -89,6 +92,7 @@ void read_input (list<Point *> *ps) {
 
 	} while (!cin.eof()); 
 }
+*/
 
 int main(int argc, char *argv[])
 {
@@ -98,30 +102,32 @@ int main(int argc, char *argv[])
 	// Algorithm: Find the nearest 2 points and connect them. Repeat until there
 	// are no more points (this is a greedy heuristic).
 
-	if (argc > 1) {
-		// Parse integer from argv[1]...
-		int num_pairs = 10;
-		istringstream sstream(argv[1]);
-		sstream >> num_pairs;
-		
-		// To generate some random pairs, we pass any argument in the CLI. 
-		generate_pairs (num_pairs);
-		return EXIT_SUCCESS;	 
-	}
-
-	// We keep 2 lists of points because we need to iterate...
-	// and when we do iterate p1,p2 = p2,p1, so we are iterating through
-	// a symmetric relations table
-	list<Point*> ps1;
 	
-	read_input (&ps1);
+	// if (argc > 1) {
+		// To generate some random pairs, we could pass an integer as argument 
+		// Parse integer from argv[1]...
+	//	int num_pairs = 10;
+	//	istringstream sstream(argv[1]);
+	//	sstream >> num_pairs;
+		
+	//	generate_pairs (num_pairs);
+	//	return EXIT_SUCCESS;	 
+	// }
 
-	if (ps1.empty()) {
-		cout << "No input detected!" << endl;
-		return EXIT_SUCCESS;
-	}
+	// Keep 2 lists of points because of the need to iterate in 2 nested loops.
+	// and when iterating, p1,p2 = p2,p1, i.e. iterating through
+	// unordered pairs.
+	list<Point*> ps1;
+
+	// stdin input, but this is a GUI app so it's disabled 
+	// read_input (&ps1);
+	// if (ps1.empty()) {
+	//	cout << "No input detected!" << endl;
+	//	return EXIT_SUCCESS;
+	//}
 
 	vector<Edge*> es;
+
 	es = compute_shortest_distances_tour_heuristic (ps1);
 	// es = compute_shortest_distances(ps1);
 
@@ -131,9 +137,6 @@ int main(int argc, char *argv[])
 	main_win->set_edges  (es);
 	main_win->set_points (ps1);
 	if (main_win) kit.run(*main_win);
-
-	// Let's make a nice plot of all this!
-	// plot_edges (es, argc, argv);
 	
 	return EXIT_SUCCESS;
 }

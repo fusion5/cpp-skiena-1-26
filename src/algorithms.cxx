@@ -1,5 +1,7 @@
 #include "algorithms.h"
 
+// #define ALGO_TRACE
+
 using namespace std;
 
 float point_distance (Point *p1, Point *p2) {
@@ -14,6 +16,8 @@ std::vector<Edge*> compute_shortest_distances_tour_heuristic (
 	std::list<Point*>  unvisited;
 	std::vector<Edge*> edges;
 	
+	if (ps1.empty()) return edges;
+
 	unvisited = list<Point*> (ps1);
 
 	Point *p;
@@ -50,7 +54,10 @@ std::vector<Edge*> compute_shortest_distances_tour_heuristic (
 		Edge* e;
 		e = new Edge(p, pnext, min);
 
-		std::cout << "Found a new edge of distance " << min << std::endl;
+#ifdef ALGO_TRACE
+		std::cout << "Found a new edge of distance " << min 
+			  << std::endl;
+#endif
 		
 		edges.push_back(e);
 
@@ -146,11 +153,13 @@ std::vector<Edge*> compute_shortest_distances(
 		ps2.erase(to_erase);
 	}
 
+#ifdef ALGO_TRACE
 	cout << "We have the smallest " 
 		 << smallest_distances.size() 
 		 << " edges." 
 		 << endl;
-
+#endif
+	
 	vector<Edge*> es;
 
 	while (!smallest_distances.empty()) {
@@ -162,9 +171,11 @@ std::vector<Edge*> compute_shortest_distances(
 		es.push_back(e);
 		smallest_distances.pop();
 	}
-
+	
+#ifdef ALGO_TRACE
 	cout << ps1.size() << " points completed in " 
 	     << steps << " steps" << endl;
-
+#endif
+	
 	return es;
 }

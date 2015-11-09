@@ -4,47 +4,57 @@
  */
 #include "plotter.h"
 
+// #define PLOTTER_TRACE
+
 Plotter::Plotter() :
-m_frame( "Tour Plot Area"
+frame( "Tour Plot Area"
        , Gtk::ALIGN_CENTER
        , Gtk::ALIGN_CENTER
        , 1.0
        , false /* Ignore child's aspect */)
 {
 
-	set_title        ("Shortest Distances Plotter");
+	set_title        ("Shortest Distances Heuristic Plotter");
 	set_border_width (10);
 
-	m_drawing_area.add_events(Gdk::BUTTON_PRESS_MASK);
+	drawing_area.add_events(Gdk::BUTTON_PRESS_MASK);
 	
-	m_button.signal_clicked().connect(
+	button_recompute.signal_clicked().connect(
 		sigc::mem_fun(*this, &Plotter::on_button_clicked));
 
-	m_drawing_area.signal_draw().connect(
+	button_reset.signal_clicked().connect(
+	    sigc::mem_fun(*this, &Plotter::on_reset_clicked));
+	
+	drawing_area.signal_draw().connect(
 	    sigc::mem_fun(*this, &Plotter::on_darea_draw));
 
-	m_drawing_area.signal_button_press_event().connect(
+	drawing_area.signal_button_press_event().connect(
 	    sigc::mem_fun(*this, &Plotter::on_darea_press));
 
-	m_button.set_label ("Recompute");
+	button_recompute.set_label ("Compute Tour");
+	button_reset.set_label ("Reset");
+	
+	frame.set_size_request(400, 400);
+	separator.set_size_request(-1, 10);
+	// button_separator1.set_size_request(10, -1);
 
-	m_frame.set_size_request(400, 400);
-	m_separator.set_size_request(-1, 10);
+	frame.add (drawing_area);
 
-	m_frame.add (m_drawing_area);
-
-	m_box.pack_start(m_frame,     Gtk::PACK_EXPAND_WIDGET);
-	m_box.pack_start(m_separator, Gtk::PACK_SHRINK);
-	m_box.pack_start(m_button,    Gtk::PACK_SHRINK);
-
-	add (m_box);
+	button_box.pack_start(button_recompute,		Gtk::PACK_EXPAND_WIDGET);
+	// button_box.pack_start(button_separator1,	Gtk::PACK_SHRINK);
+	button_box.pack_start(button_reset,			Gtk::PACK_EXPAND_WIDGET);
+	box.pack_start(frame, 						Gtk::PACK_EXPAND_WIDGET);
+	box.pack_start(separator,	 				Gtk::PACK_SHRINK);
+	box.pack_start(button_box,					Gtk::PACK_SHRINK);
+		
+	add (box);
 	
 	show_all_children ();
 }
 
 bool Plotter::on_darea_press (const GdkEventButton *evt) {
 
-	Gtk::Allocation allocation = m_drawing_area.get_allocation();
+	Gtk::Allocation allocation = drawing_area.get_allocation();
 	const int width  = allocation.get_width();
 	const int height = allocation.get_height();
 
@@ -55,10 +65,12 @@ bool Plotter::on_darea_press (const GdkEventButton *evt) {
 	new_point->x = evt->x * xscale;
 	new_point->y = evt->y * yscale;
 
+
+#ifdef PLOTTER_TRACE
 	std::cout << "Area press at coords: " 
 		  << new_point->x << " " 
 		  << new_point->y << std::endl;
-
+#endif
 	
 	this->points.push_back(new_point);
 
@@ -70,8 +82,11 @@ bool Plotter::on_darea_press (const GdkEventButton *evt) {
 void Plotter::set_points(std::list<Point*> ps) {
 	this->points = ps;
 
-	this->max_x = 0.0;
-	this->max_y = 0.0;
+	// If there are no initial points, we use 100 width and 100 height as 
+	// defaults (this means we'll have a grid of 100x100 because Point x and y 
+	// are integers).
+	this->max_x = 100.0;
+	this->max_y = 100.0;
 
 	for ( std::list<Point*>::iterator it = this->points.begin()
 		; it != this->points.end()
@@ -88,19 +103,25 @@ void Plotter::set_edges(std::vector<Edge*> es) {
 Plotter::~Plotter() {
 }
 
+void Plotter::on_reset_clicked() {
+	this->edges.clear();
+	this->points.clear();
+	queue_draw();
+}
+
 void Plotter::on_button_clicked () {
-	std::cout << "Hello World!" << std::endl;
-	// Recompute the shortest path heurstic...
 	this->edges = 
 		compute_shortest_distances_tour_heuristic (this->points);
-
 	queue_draw();
 }
 
 bool Plotter::on_darea_draw (const Cairo::RefPtr<Cairo::Context> &cr) {
-	std::cout << "Redraw drawing area..." << std::endl;
+
+#ifdef PLOTTER_TRACE
+	// std::cout << "Redraw drawing area..." << std::endl;
+#endif
 	
-	Gtk::Allocation allocation = m_drawing_area.get_allocation();
+	Gtk::Allocation allocation = drawing_area.get_allocation();
 	const int width  = allocation.get_width();
 	const int height = allocation.get_height();
 	
