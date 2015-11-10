@@ -45,16 +45,16 @@ frame( "Tour diagram: click to add a point"
 	frame.add (drawing_area);
 
 	button_box.set_layout(Gtk::BUTTONBOX_EXPAND);
-	button_box.add(button_closest_pairs);	
-	button_box.add(button_closest_next);	
-	button_box.add(button_reset);
+	button_box.add (button_closest_pairs);	
+	button_box.add (button_closest_next);	
+	button_box.add (button_reset);
 	
-	box.pack_start(frame, 						Gtk::PACK_EXPAND_WIDGET);
-	box.pack_start(separator,	 				Gtk::PACK_SHRINK);
-	box.pack_start(button_box,					Gtk::PACK_SHRINK);
-		
+	box.pack_start (frame, 		Gtk::PACK_EXPAND_WIDGET);
+	box.pack_start (separator,	Gtk::PACK_SHRINK);
+	box.pack_start (button_box,	Gtk::PACK_SHRINK);
+
 	add (box);
-	
+
 	show_all_children ();
 }
 
