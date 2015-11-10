@@ -20,13 +20,13 @@ frame( "Tour diagram: click to add a point"
 	drawing_area.add_events(Gdk::BUTTON_PRESS_MASK);
 	
 	button_closest_pairs.signal_clicked().connect(
-		sigc::mem_fun(*this, &Plotter::on_button_clicked));
+		sigc::mem_fun(*this, &Plotter::on_button_pairs_clicked));
 
 	button_closest_next.signal_clicked().connect(
-		sigc::mem_fun(*this, &Plotter::on_button_2_clicked));
+		sigc::mem_fun(*this, &Plotter::on_button_closest_clicked));
 
 	button_reset.signal_clicked().connect(
-	    sigc::mem_fun(*this, &Plotter::on_reset_clicked));
+	    sigc::mem_fun(*this, &Plotter::on_button_reset_clicked));
 	
 	drawing_area.signal_draw().connect(
 	    sigc::mem_fun(*this, &Plotter::on_darea_draw));
@@ -106,23 +106,19 @@ void Plotter::set_edges(std::vector<Edge*> es) {
 Plotter::~Plotter() {
 }
 
-void Plotter::on_reset_clicked() {
+void Plotter::on_button_reset_clicked() {
 	this->edges.clear();
 	this->points.clear();
 	queue_draw();
 }
 
-void Plotter::on_button_clicked () {
-	this->edges = 
-		compute_closest_pairs_tour_heuristic (this->points);
-
+void Plotter::on_button_pairs_clicked () {
+	this->edges = compute_closest_pairs_tour_heuristic (this->points);
 	queue_draw();
 }
 
-void Plotter::on_button_2_clicked () {
-	this->edges = 
-		compute_shortest_distances_tour_heuristic (this->points);
-
+void Plotter::on_button_closest_clicked () {
+	this->edges = compute_shortest_distances_tour_heuristic (this->points);
 	queue_draw();
 }
 bool Plotter::on_darea_draw (const Cairo::RefPtr<Cairo::Context> &cr) {

@@ -21,9 +21,9 @@ class Plotter : public Gtk::Window {
 		void set_edges  (std::vector<Edge*> es);
 		void set_points (std::list<Point*> ps);
 	protected:
-		void on_button_clicked();
-		void on_button_2_clicked();
-		void on_reset_clicked ();
+		void on_button_pairs_clicked ();
+		void on_button_closest_clicked ();
+		void on_button_reset_clicked ();
 		virtual bool on_darea_draw(const Cairo::RefPtr<Cairo::Context> &cr);
 		virtual bool on_darea_press(const GdkEventButton *evt);
 		Gtk::Button		button_closest_pairs;
