@@ -10,8 +10,11 @@
 #include <limits>
 #include <set>
 #include <queue>
+#include <cassert>
 
 std::vector<Edge*> compute_shortest_distances_tour_heuristic (
+	std::list<Point*> ps1);
+std::vector<Edge*> compute_closest_pairs_tour_heuristic (
 	std::list<Point*> ps1);
 std::vector<Edge*> compute_shortest_distances(
 	std::list<Point*> ps1);

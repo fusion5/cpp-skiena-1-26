@@ -19,8 +19,11 @@ frame( "Tour diagram: click to add a point"
 
 	drawing_area.add_events(Gdk::BUTTON_PRESS_MASK);
 	
-	button_recompute.signal_clicked().connect(
+	button_closest_pairs.signal_clicked().connect(
 		sigc::mem_fun(*this, &Plotter::on_button_clicked));
+
+	button_closest_next.signal_clicked().connect(
+		sigc::mem_fun(*this, &Plotter::on_button_2_clicked));
 
 	button_reset.signal_clicked().connect(
 	    sigc::mem_fun(*this, &Plotter::on_reset_clicked));
@@ -31,7 +34,8 @@ frame( "Tour diagram: click to add a point"
 	drawing_area.signal_button_press_event().connect(
 	    sigc::mem_fun(*this, &Plotter::on_darea_press));
 
-	button_recompute.set_label ("Compute Tour");
+	button_closest_next.set_label  ("Closest Next");
+	button_closest_pairs.set_label ("Closest Pairs");
 	button_reset.set_label ("Reset");
 	
 	frame.set_size_request(400, 400);
@@ -41,7 +45,8 @@ frame( "Tour diagram: click to add a point"
 	frame.add (drawing_area);
 
 	button_box.set_layout(Gtk::BUTTONBOX_EXPAND);
-	button_box.add(button_recompute);	
+	button_box.add(button_closest_pairs);	
+	button_box.add(button_closest_next);	
 	button_box.add(button_reset);
 	
 	box.pack_start(frame, 						Gtk::PACK_EXPAND_WIDGET);
@@ -62,10 +67,7 @@ bool Plotter::on_darea_press (const GdkEventButton *evt) {
 	float xscale = max_x / width;
 	float yscale = max_y / height;
 
-	Point *new_point = new Point();
-	new_point->x = evt->x * xscale;
-	new_point->y = evt->y * yscale;
-
+	Point *new_point = new Point(evt->x * xscale, evt->y * yscale);
 
 #ifdef PLOTTER_TRACE
 	std::cout << "Area press at coords: " 
@@ -112,10 +114,17 @@ void Plotter::on_reset_clicked() {
 
 void Plotter::on_button_clicked () {
 	this->edges = 
-		compute_shortest_distances_tour_heuristic (this->points);
+		compute_closest_pairs_tour_heuristic (this->points);
+
 	queue_draw();
 }
 
+void Plotter::on_button_2_clicked () {
+	this->edges = 
+		compute_shortest_distances_tour_heuristic (this->points);
+
+	queue_draw();
+}
 bool Plotter::on_darea_draw (const Cairo::RefPtr<Cairo::Context> &cr) {
 
 #ifdef PLOTTER_TRACE
@@ -146,12 +155,11 @@ bool Plotter::on_darea_draw (const Cairo::RefPtr<Cairo::Context> &cr) {
 	
 	for ( std::list <Point*>::iterator it = this->points.begin()
 	    ; it != this->points.end()
-	    ; ++it) {
-			
+	    ; ++it) 
 		cr->rectangle( (*it)->x * xscale - rect_size
 		             , (*it)->y * yscale - rect_size
 		             , 2 * rect_size
 		             , 2 * rect_size);
-	}
+	
 	cr->stroke();
 }

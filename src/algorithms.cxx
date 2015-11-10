@@ -6,8 +6,115 @@ using namespace std;
 
 float point_distance (Point *p1, Point *p2) {
 	// Pythagoras
-	return sqrt(pow ((float) p1->x - (float) p2->x, 2) 
-			  + pow ((float) p1->y - (float) p2->y, 2));
+	return sqrt (pow ((float) p1->x - (float) p2->x, 2) 
+		   + pow ((float) p1->y - (float) p2->y, 2));
+}
+
+vector<Edge*> compute_closest_pairs_tour_heuristic(
+	list<Point*> ps1) {
+
+	vector<Edge*> edges;
+	if (ps1.empty()) return edges;
+
+	vector<list<Point*>*> chains;
+
+	for (	list<Point*>::iterator it = ps1.begin(); 
+		it != ps1.end();
+		++it
+	) {
+		list <Point*> *l = new list<Point*>();
+		l->push_back(*it);
+		chains.push_back(l);
+	}
+
+	int k = 0;
+	float dmin;
+	bool reverse;
+	list<Point*> *chain1;
+	list<Point*> *chain2;
+
+	while (k < ps1.size()) {
+		
+		dmin = numeric_limits<float>::max();
+
+		// Given 2 chains, there are 4 ways to connect them. The algorithm
+		// picks the one that requires the shortest distance...
+
+		vector<list<Point*>*>::iterator from = chains.begin();
+		for (from; from != chains.end(); ++from) {
+			vector<list<Point*>*>::iterator to = from;
+			to++;
+			
+			for (to; to != chains.end(); ++to) {
+
+				if ((*from)->empty()) continue;
+				if ((*to)->empty()) continue;
+
+				Point *from_begin = *((*from)->begin());
+				Point *from_end   = *(--((*from)->end()));
+				Point *to_begin	  = *((*to)->begin());
+				Point *to_end     = *(--((*to)->end()));
+				
+				float d;
+
+				d = point_distance (from_begin, to_begin);
+				if (d < dmin) {
+					dmin       	= d;
+					reverse		= true;
+					chain1 		= *from;
+					chain2		= *to;
+				}
+				
+				d = point_distance (from_begin, to_end);
+				if (d < dmin) {
+					dmin 	   	= d;
+					reverse		= false;
+					chain1		= *to;
+					chain2		= *from;
+				}
+
+				d = point_distance (from_end, to_begin);
+				if (d < dmin) {
+					dmin       	= d;
+					reverse    	= false;
+					chain1		= *from;
+					chain2		= *to;
+				}
+				
+				d = point_distance (from_end, to_end);
+				if (d < dmin) {
+					dmin 	     	= d;
+					reverse		= true;
+					chain1		= *to;
+					chain2		= *from;
+				}
+			}
+		}
+
+		if (reverse) chain1->reverse();
+		chain1->splice(chain1->end(), *chain2);
+
+		k++;
+	}
+
+	// Format the final chain as edges...
+
+	vector<list<Point*>*>::iterator i = chains.begin();
+	for (i; i != chains.end(); ++i) {
+		if ((*i)->empty()) continue;
+		cout << "Final chain!" << endl;
+		list <Point*>::iterator j = (*i)->begin();
+		for (j; j != (*i)->end(); ++j) { 
+
+			list <Point*>::iterator next = j;
+			if (++next == (*i)->end()) continue;
+
+			Edge *e = new Edge (*j, *next, 0);
+			edges.push_back(e);
+		}
+	}
+
+	return edges;
 }
 
 std::vector<Edge*> compute_shortest_distances_tour_heuristic (
@@ -18,8 +125,7 @@ std::vector<Edge*> compute_shortest_distances_tour_heuristic (
 	
 	if (ps1.empty()) return edges;
 
-	unvisited = list<Point*> (ps1);
-
+	unvisited = list<Point*> (ps1); 
 	Point *p;
 	Point *pnext;
 	Point *first;
@@ -123,7 +229,9 @@ std::vector<Edge*> compute_shortest_distances(
 	min = std::numeric_limits<int>::max();
 	
 	std::list<Point*>::iterator to_erase;
-	
+
+	// FIXME: Iterate more nicely by initializing j with i and not with a 
+	// copy!
 	for (std::list<Point*>::iterator i = ps1.begin(); i != ps1.end(); ++i) {
 		for (std::list<Point*>::iterator j = ps2.begin(); j != ps2.end(); ++j) {
 			if (*i == *j) {
@@ -135,6 +243,7 @@ std::vector<Edge*> compute_shortest_distances(
 			float d = point_distance(*i, *j);
 			steps++;
 
+			// TODO: think about memory consumption here some more...
 			Edge *e = new Edge(*i, *j, d);
 
 			if (smallest_distances.size() < ps1.size()) {
