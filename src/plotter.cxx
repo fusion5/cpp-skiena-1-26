@@ -40,7 +40,6 @@ frame( "Tour diagram: click to add a point"
 	
 	frame.set_size_request(400, 400);
 	separator.set_size_request(-1, 10);
-	// button_separator1.set_size_request(10, -1);
 
 	frame.add (drawing_area);
 

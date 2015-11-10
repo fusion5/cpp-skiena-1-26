@@ -37,8 +37,9 @@ vector<Edge*> compute_closest_pairs_tour_heuristic(
 		
 		dmin = numeric_limits<float>::max();
 
-		// Given 2 chains, there are 4 ways to connect them. The algorithm
-		// picks the one that requires the shortest distance...
+		// Given 2 chains, there are 4 ways to connect them with an edge:
+		// begin-begin, begin-end, end-begin and end-end.
+		// The algorithm picks the way that produces the shortest edge...
 
 		vector<list<Point*>*>::iterator from = chains.begin();
 		for (from; from != chains.end(); ++from) {
@@ -102,7 +103,6 @@ vector<Edge*> compute_closest_pairs_tour_heuristic(
 	vector<list<Point*>*>::iterator i = chains.begin();
 	for (i; i != chains.end(); ++i) {
 		if ((*i)->empty()) continue;
-		cout << "Final chain!" << endl;
 		list <Point*>::iterator j = (*i)->begin();
 		for (j; j != (*i)->end(); ++j) { 
 
@@ -112,6 +112,9 @@ vector<Edge*> compute_closest_pairs_tour_heuristic(
 			Edge *e = new Edge (*j, *next, 0);
 			edges.push_back(e);
 		}
+
+		Edge *e = new Edge (*((*i)->begin()), *(--(*i)->end()), 0);
+		edges.push_back(e);
 	}
 
 	return edges;
@@ -235,7 +238,6 @@ std::vector<Edge*> compute_shortest_distances(
 	for (std::list<Point*>::iterator i = ps1.begin(); i != ps1.end(); ++i) {
 		for (std::list<Point*>::iterator j = ps2.begin(); j != ps2.end(); ++j) {
 			if (*i == *j) {
-				// cout << *i << " " << *j << " equal" << endl;
 				to_erase = j;
 				continue;
 			}
@@ -273,9 +275,11 @@ std::vector<Edge*> compute_shortest_distances(
 
 	while (!smallest_distances.empty()) {
 		Edge *e = smallest_distances.top();
+#ifdef ALGO_TRACE
 		cout << e->p1->x << ", " << e->p1->y << " -> " 
 		     << e->p2->x << ", " << e->p2->y << " distance " 
 		     << e->distance << endl;
+#endif
 		
 		es.push_back(e);
 		smallest_distances.pop();
