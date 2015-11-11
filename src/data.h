@@ -2,15 +2,9 @@
 #define SKIENA_1_26_DATA_INCLUDED
 
 struct Point {
-	int x;
-	int y;	
-	Point (int a, int b) : x(a), y(b) {}
-};
-
-struct PointWithDegree {
-	Point *p;
-	int   degree;
-	PointWithDegree (Point *p, int degree) : p(p), degree(degree) {}
+	float x;
+	float y;	
+	Point (float a, float b) : x(a), y(b) {}
 };
 
 class Edge {

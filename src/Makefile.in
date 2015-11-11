@@ -102,8 +102,9 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_skiena_1_26_OBJECTS = main.$(OBJEXT) plotter.$(OBJEXT) \
-	algorithms.$(OBJEXT) data.$(OBJEXT)
+am_skiena_1_26_OBJECTS = skiena_1_26-main.$(OBJEXT) \
+	skiena_1_26-plotter.$(OBJEXT) skiena_1_26-algorithms.$(OBJEXT) \
+	skiena_1_26-data.$(OBJEXT)
 skiena_1_26_OBJECTS = $(am_skiena_1_26_OBJECTS)
 am__DEPENDENCIES_1 =
 skiena_1_26_DEPENDENCIES = $(am__DEPENDENCIES_1)
@@ -112,7 +113,7 @@ am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
 am__v_lt_1 = 
 skiena_1_26_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
+	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(skiena_1_26_CXXFLAGS) \
 	$(CXXFLAGS) $(skiena_1_26_LDFLAGS) $(LDFLAGS) -o $@
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
@@ -338,6 +339,7 @@ skiena_1_26_SOURCES = \
 	algorithms.cxx \
 	data.cxx
 
+skiena_1_26_CXXFLAGS = --std=c++11 
 skiena_1_26_LDFLAGS = $(am__append_1)
 skiena_1_26_LDADD = $(SKIENA_1_26_LIBS)
 all: all-am
@@ -433,10 +435,10 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/algorithms.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/data.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/main.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/plotter.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/skiena_1_26-algorithms.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/skiena_1_26-data.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/skiena_1_26-main.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/skiena_1_26-plotter.Po@am__quote@
 
 .cc.o:
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -458,6 +460,62 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='$<' object='$@' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LTCXXCOMPILE) -c -o $@ $<
+
+skiena_1_26-main.o: main.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(skiena_1_26_CXXFLAGS) $(CXXFLAGS) -MT skiena_1_26-main.o -MD -MP -MF $(DEPDIR)/skiena_1_26-main.Tpo -c -o skiena_1_26-main.o `test -f 'main.cc' || echo '$(srcdir)/'`main.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/skiena_1_26-main.Tpo $(DEPDIR)/skiena_1_26-main.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='main.cc' object='skiena_1_26-main.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(skiena_1_26_CXXFLAGS) $(CXXFLAGS) -c -o skiena_1_26-main.o `test -f 'main.cc' || echo '$(srcdir)/'`main.cc
+
+skiena_1_26-main.obj: main.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(skiena_1_26_CXXFLAGS) $(CXXFLAGS) -MT skiena_1_26-main.obj -MD -MP -MF $(DEPDIR)/skiena_1_26-main.Tpo -c -o skiena_1_26-main.obj `if test -f 'main.cc'; then $(CYGPATH_W) 'main.cc'; else $(CYGPATH_W) '$(srcdir)/main.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/skiena_1_26-main.Tpo $(DEPDIR)/skiena_1_26-main.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='main.cc' object='skiena_1_26-main.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(skiena_1_26_CXXFLAGS) $(CXXFLAGS) -c -o skiena_1_26-main.obj `if test -f 'main.cc'; then $(CYGPATH_W) 'main.cc'; else $(CYGPATH_W) '$(srcdir)/main.cc'; fi`
+
+skiena_1_26-plotter.o: plotter.cxx
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(skiena_1_26_CXXFLAGS) $(CXXFLAGS) -MT skiena_1_26-plotter.o -MD -MP -MF $(DEPDIR)/skiena_1_26-plotter.Tpo -c -o skiena_1_26-plotter.o `test -f 'plotter.cxx' || echo '$(srcdir)/'`plotter.cxx
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/skiena_1_26-plotter.Tpo $(DEPDIR)/skiena_1_26-plotter.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='plotter.cxx' object='skiena_1_26-plotter.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(skiena_1_26_CXXFLAGS) $(CXXFLAGS) -c -o skiena_1_26-plotter.o `test -f 'plotter.cxx' || echo '$(srcdir)/'`plotter.cxx
+
+skiena_1_26-plotter.obj: plotter.cxx
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(skiena_1_26_CXXFLAGS) $(CXXFLAGS) -MT skiena_1_26-plotter.obj -MD -MP -MF $(DEPDIR)/skiena_1_26-plotter.Tpo -c -o skiena_1_26-plotter.obj `if test -f 'plotter.cxx'; then $(CYGPATH_W) 'plotter.cxx'; else $(CYGPATH_W) '$(srcdir)/plotter.cxx'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/skiena_1_26-plotter.Tpo $(DEPDIR)/skiena_1_26-plotter.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='plotter.cxx' object='skiena_1_26-plotter.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(skiena_1_26_CXXFLAGS) $(CXXFLAGS) -c -o skiena_1_26-plotter.obj `if test -f 'plotter.cxx'; then $(CYGPATH_W) 'plotter.cxx'; else $(CYGPATH_W) '$(srcdir)/plotter.cxx'; fi`
+
+skiena_1_26-algorithms.o: algorithms.cxx
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(skiena_1_26_CXXFLAGS) $(CXXFLAGS) -MT skiena_1_26-algorithms.o -MD -MP -MF $(DEPDIR)/skiena_1_26-algorithms.Tpo -c -o skiena_1_26-algorithms.o `test -f 'algorithms.cxx' || echo '$(srcdir)/'`algorithms.cxx
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/skiena_1_26-algorithms.Tpo $(DEPDIR)/skiena_1_26-algorithms.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='algorithms.cxx' object='skiena_1_26-algorithms.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(skiena_1_26_CXXFLAGS) $(CXXFLAGS) -c -o skiena_1_26-algorithms.o `test -f 'algorithms.cxx' || echo '$(srcdir)/'`algorithms.cxx
+
+skiena_1_26-algorithms.obj: algorithms.cxx
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(skiena_1_26_CXXFLAGS) $(CXXFLAGS) -MT skiena_1_26-algorithms.obj -MD -MP -MF $(DEPDIR)/skiena_1_26-algorithms.Tpo -c -o skiena_1_26-algorithms.obj `if test -f 'algorithms.cxx'; then $(CYGPATH_W) 'algorithms.cxx'; else $(CYGPATH_W) '$(srcdir)/algorithms.cxx'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/skiena_1_26-algorithms.Tpo $(DEPDIR)/skiena_1_26-algorithms.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='algorithms.cxx' object='skiena_1_26-algorithms.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(skiena_1_26_CXXFLAGS) $(CXXFLAGS) -c -o skiena_1_26-algorithms.obj `if test -f 'algorithms.cxx'; then $(CYGPATH_W) 'algorithms.cxx'; else $(CYGPATH_W) '$(srcdir)/algorithms.cxx'; fi`
+
+skiena_1_26-data.o: data.cxx
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(skiena_1_26_CXXFLAGS) $(CXXFLAGS) -MT skiena_1_26-data.o -MD -MP -MF $(DEPDIR)/skiena_1_26-data.Tpo -c -o skiena_1_26-data.o `test -f 'data.cxx' || echo '$(srcdir)/'`data.cxx
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/skiena_1_26-data.Tpo $(DEPDIR)/skiena_1_26-data.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='data.cxx' object='skiena_1_26-data.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(skiena_1_26_CXXFLAGS) $(CXXFLAGS) -c -o skiena_1_26-data.o `test -f 'data.cxx' || echo '$(srcdir)/'`data.cxx
+
+skiena_1_26-data.obj: data.cxx
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(skiena_1_26_CXXFLAGS) $(CXXFLAGS) -MT skiena_1_26-data.obj -MD -MP -MF $(DEPDIR)/skiena_1_26-data.Tpo -c -o skiena_1_26-data.obj `if test -f 'data.cxx'; then $(CYGPATH_W) 'data.cxx'; else $(CYGPATH_W) '$(srcdir)/data.cxx'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/skiena_1_26-data.Tpo $(DEPDIR)/skiena_1_26-data.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='data.cxx' object='skiena_1_26-data.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(skiena_1_26_CXXFLAGS) $(CXXFLAGS) -c -o skiena_1_26-data.obj `if test -f 'data.cxx'; then $(CYGPATH_W) 'data.cxx'; else $(CYGPATH_W) '$(srcdir)/data.cxx'; fi`
 
 .cxx.o:
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<

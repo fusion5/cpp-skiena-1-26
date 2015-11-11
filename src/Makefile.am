@@ -25,6 +25,8 @@ skiena_1_26_SOURCES = \
 	algorithms.cxx \
 	data.cxx
 
+skiena_1_26_CXXFLAGS = --std=c++11 
+
 skiena_1_26_LDFLAGS = 
 
 skiena_1_26_LDADD = $(SKIENA_1_26_LIBS)

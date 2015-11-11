@@ -1,6 +1,10 @@
 A GUI to define points and to compute a shortest tour between them. 
-It uses a very basic, greedy algorithm for now, always choosing the closest 
-point as the next one, but other algorithms might be implemented in the future.
+It uses 2 basic, greedy algorithms (from algorithms.cxx) for now:
+- closest pairs: pick the closest chain ends that exist and connect them 
+  with an edge. Begin with all vertices being a 1-vertex chain.
+- closest next point: after the current point is visited, pick the next 
+  unvisited point that is closest to it. Repeat until all points are visited. 
+- other, more efficient algorithms might be implemented in the future.
 
 To compute the closest point, the algorithm traverses all unvisited points; but
 a more efficient Voronoi diagram could be precomputed which would give us more
