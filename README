@@ -1,15 +1,18 @@
 A GUI to define points and to compute a shortest tour between them. 
-It uses 2 basic, greedy algorithms (from algorithms.cxx) for now:
+It uses 2 basic, greedy algorithms [1] (from algorithms.cxx) for now:
 - closest pairs: pick the closest chain ends that exist and connect them 
   with an edge. Begin with all vertices being a 1-vertex chain.
 - closest next point: after the current point is visited, pick the next 
   unvisited point that is closest to it. Repeat until all points are visited. 
-- other, more efficient algorithms might be implemented in the future.
 
-To compute the closest point, the algorithm traverses all unvisited points; but
-a more efficient Voronoi diagram could be precomputed which would give us more
-speed. 
+To find the closest point, the algorithms traverse all existing points; but
+a more efficient Voronoi diagram could be precomputed, which would give us more
+speed.
 
-Screenshot: 
+(Older) Screenshot: 
 
 https://github.com/fusion5/skiena-1-26/blob/master/screenshot-1.png
+
+Bibliography:
+
+[1] The Algorithm Design Manual, Second Edition, 2008, p.6-7, Steven S. Skiena
